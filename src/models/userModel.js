@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true,
          enum:["Mr", "Mrs", "Miss"],
-         trim:true
+        
         },
 
     name: {
@@ -18,15 +18,16 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+       
      },
 
     email: {
         type:String,
-        lowercase:true,
         required:true,
         lowercase:true,
-        unique:true
+        unique:true,
+      
         }, 
 
     password: {

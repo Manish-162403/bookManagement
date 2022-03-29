@@ -13,5 +13,9 @@ router.post("/books",bookController.createBook)
 
 router.get("/books",bookController.getBook)
 
+router.put("/books/:bookId",bookController.updateBook)
+
+router.delete("/books/:bookId", bookController.deleteBookById)
+
 module.exports = router;
 //adding this comment for nothing

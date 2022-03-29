@@ -28,8 +28,8 @@ try{
 
 if(!isValidRequestBody(data)){return res.status(400).send({status:false, ERROR: "please provide Data"})}
 
-if(!isValid(data.title)){return res.status(400).send({status:false, ERROR: "title required"})}
-if(!isvalidTitle(data.title)){return res.status(400).send({status:false, ERROR: "valid title required"})}
+if(!isValid(data.title.trim())){return res.status(400).send({status:false, ERROR: "title required"})}
+if(!isvalidTitle(data.title.trim())){return res.status(400).send({status:false, ERROR: "valid title required"})}
 
 
 if(!isValid(data.name)){return res.status(400).send({status:false, ERROR: "Name required"})}  
@@ -38,7 +38,7 @@ if(!isValid(data.name)){return res.status(400).send({status:false, ERROR: "Name 
 if (!isValid(data.phone)) {
     return res.status(400).send({ status: false, msg: "mobile is required" })}
 
-if (!/^([+]\d{2})?\d{10}$/.test(data.phone)) {return res.status(400).send({ status: false, msg: "please provide a valid moblie Number" });} 
+if (!/^([+]\d{2})?\d{10}$/.test(data.phone.trim())) {return res.status(400).send({ status: false, msg: "please provide a valid moblie Number" });} 
 
 let duplicateMobile = await userModel.findOne({phone: data.phone}) 
      if(duplicateMobile){return res.status(400).send({status:false , msg:"mobile number already exists"})}
@@ -46,14 +46,14 @@ let duplicateMobile = await userModel.findOne({phone: data.phone})
 
 
 if(!isValid(data.email)){return res.status(400).send({status:false, ERROR: "Email required"})} 
-if (!/^\w+([\.-]?\w+)@\w+([\. -]?\w+)(\.\w{2,3})+$/.test(data.email)) {return res.status(400).send({ status: false, msg: "Please provide a valid email" });}
+if (!/^\w+([\.-]?\w+)@\w+([\. -]?\w+)(\.\w{2,3})+$/.test(data.email.trim())) {return res.status(400).send({ status: false, msg: "Please provide a valid email" });}
 
 let duplicateEmail = await userModel.findOne({email: data.email}) 
      if(duplicateEmail){return res.status(400).send({status:false , msg:"Email already exists"})}
 
 
-if(!isValid(data.password)){return res.status(400).send({status:false, ERROR: "Password required"})}  
-if(! (/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,15}$/.test(data.password)) ){return res.status(400).send({status:false , msg:"please provide a valid password with one uppercase letter ,one lowercase, one character and one number "})}
+if(!isValid(data.password.trim())){return res.status(400).send({status:false, ERROR: "Password required"})}  
+if(! (/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,15}$/.test(data.password.trim())) ){return res.status(400).send({status:false , msg:"please provide a valid password with one uppercase letter ,one lowercase, one character and one number "})}
 
 
  const savedData = await userModel.create(data)
@@ -78,7 +78,7 @@ if(!isValid(data.email)){return res.status(401).send({status:false, ERROR: "plea
 
 if(!isValid(data.password)){return res.status(401).send({status:false, ERROR: "please input valid password"})}
 
-const user= await userModel.findOne({email:data.email, password:data.password})
+const user= await userModel.findOne({email:data.email.trim(), password:data.password.trim()})
 if(!user){return res.status(404).send({status:false, ERROR:"User not  found"})}
 
 const token = jwt.sign({
