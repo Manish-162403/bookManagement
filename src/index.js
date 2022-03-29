@@ -20,7 +20,7 @@ app.use(express.static('public'));
 
 const mongoose = require('mongoose');
 mongoose.connect("mongodb+srv://group13:UEEqzwKeluhyT2uM@cluster0.hkvjs.mongodb.net/group17Database?retryWrites=true&w=majority",{useNewUrlParser:true})
-.then(()=>console.log("MongoDb connected"))
+.then(()=>console.log("Shabdika  you are connected to MongoDb Successfully"))
 .catch(err=>console.log(err))
 app.use('/',route);
 

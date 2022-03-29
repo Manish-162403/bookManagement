@@ -4,6 +4,7 @@ const router = express.Router();
 
 const userController = require("../controller/userController")
 const bookController = require("../controller/bookController")
+const reviewController = require("../controller/reviewController")
 
 router.post("/register", userController.createUser)
 
@@ -16,6 +17,8 @@ router.get("/books",bookController.getBook)
 router.put("/books/:bookId",bookController.updateBook)
 
 router.delete("/books/:bookId", bookController.deleteBookById)
+
+router.post("/books/:bookId/review", reviewController.createReview )
 
 module.exports = router;
 //adding this comment for nothing
